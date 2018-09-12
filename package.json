@@ -1,0 +1,56 @@
+{
+  "name": "react-trello",
+  "version": "1.0.0",
+  "description": "practice to build simple trello board in react",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "webpack -d --watch",
+    "start": "nodemon server/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Pisotski/React-trello.git"
+  },
+  "author": "Pisotski",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Pisotski/React-trello/issues"
+  },
+  "homepage": "https://github.com/Pisotski/React-trello#readme",
+  "devDependencies": {
+    "@babel/core": "^7.0.0",
+    "@babel/preset-env": "^7.0.0",
+    "babel-core": "^6.26.3",
+    "babel-eslint": "^9.0.0",
+    "babel-loader": "^7.1.2",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "babel-plugin-transform-runtime": "^6.23.0",
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-react": "^6.24.1",
+    "css-loader": "^1.0.0",
+    "eslint-config-airbnb": "^17.1.0",
+    "eslint-loader": "^2.1.0",
+    "gulp-babel": "^8.0.0",
+    "html-loader": "^0.5.5",
+    "html-webpack-plugin": "^3.2.0",
+    "mini-css-extract-plugin": "^0.4.2",
+    "webpack": "^4.17.2",
+    "webpack-cli": "^3.1.0"
+  },
+  "dependencies": {
+    "babel-runtime": "^6.26.0",
+    "eslint": "^4.19.1 || ^5.3.0",
+    "eslint-plugin-import": "^2.14.0",
+    "eslint-plugin-jsx-a11y": "^6.1.1",
+    "eslint-plugin-react": "^7.11.0",
+    "express": "^4.16.3",
+    "morgan": "^1.9.0",
+    "prop-types": "^15.6.2",
+    "react": "^16.5.0",
+    "react-dom": "^16.5.0",
+    "reload": "^2.3.1",
+    "start-server-webpack-plugin": "^2.2.5",
+    "webpack-node-externals": "^1.7.2"
+  }
+}
