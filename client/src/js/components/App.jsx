@@ -15,6 +15,7 @@ class App extends React.Component {
     };
     this.renderList = this.renderList.bind(this);
     this.acceptCardToList = this.acceptCardToList.bind(this);
+    this.deleteInsertListItem = this.deleteInsertListItem.bind(this);
   }
 
   componentDidMount() {
@@ -29,6 +30,19 @@ class App extends React.Component {
     });
   }
 
+  deleteInsertListItem(direction, listId, itemId) {
+    const { listInfo } = this.state;
+    const temp = listInfo[listId].listItems[itemId];
+    // listInfo[listId].listItems.splice(itemId, 0);
+
+    console.log(listInfo[listId].listItems.splice(itemId, 1));
+    this.setState({
+      listInfo,
+    });
+    const move = direction === 'left-arrow' ? listId - 1 : listId + 1;
+    this.acceptCardToList(move, temp);
+  }
+
   renderList() {
     const { listInfo } = this.state;
     const createNewList = () => {
@@ -36,10 +50,10 @@ class App extends React.Component {
       const { defaultList } = this.state;
       const newList = JSON.parse(JSON.stringify(defaultList));
       newList.id = newId;
-      // newList.listItems = [];
       return newList;
     };
-
+    // think of how not to mutate state without that much of space.
+    // maybe change shape of initial state.
     const newListInfo = listInfo.concat([createNewList()]);
     this.setState({
       listInfo: newListInfo,
@@ -54,7 +68,7 @@ class App extends React.Component {
           Add List
         </button>
         <div className="main-board">
-          {listInfo.map(list => <List key={list.id} id={list.id} info={list} passTextToStateManager={this.acceptCardToList} />)}
+          {listInfo.filter(list => list).map(list => <List key={list.id} id={list.id} length={listInfo.length} info={list} passTextToStateManager={this.acceptCardToList} deleteInsertListItem={this.deleteInsertListItem} />)}
         </div>
       </div>
     );

@@ -6,19 +6,32 @@ class List extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      listContent: [],
       currentText: '',
       showTextArea: false,
     };
     this.toggleTextField = this.toggleTextField.bind(this);
     this.acceptText = this.acceptText.bind(this);
     this.handleListItemChange = this.handleListItemChange.bind(this);
-    this.onListItemFocus = this.onListItemFocus.bind(this);
+    this.handleArrowClick = this.handleArrowClick.bind(this);
   }
 
-  onListItemFocus() {
-    const { showTextArea } = this.state;
-    alert(showTextArea);
+  handleArrowClick(e) {
+    const { length, id } = this.props;
+    const direction = e.currentTarget.className;
+    const itemId = e.currentTarget.parentNode.id;
+    const validList = (arrowDirection) => {
+      if (arrowDirection === 'left-arrow') {
+        return id > 0;
+      } if (arrowDirection === 'right-arrow') { return id < length - 1; }
+      return 'check className';
+    };
+
+    if (validList(direction)) {
+      const { deleteInsertListItem } = this.props;
+      deleteInsertListItem(direction, id, itemId);
+    } else {
+      console.log('Invalid direction', validList(direction));
+    }
   }
 
   toggleTextField() {
@@ -31,15 +44,10 @@ class List extends React.Component {
 
   acceptText(e) {
     e.preventDefault();
-    // let { listContent } = this.state;
     const { currentText } = this.state;
-    // listContent = listContent.concat([currentText]);
-
-    // this.setState({
-    //   listContent,
-    // });
+    const { passTextToStateManager, id } = this.props;
     this.toggleTextField();
-    this.props.passTextToStateManager(this.props.id, currentText);
+    passTextToStateManager(id, currentText);
   }
 
   handleListItemChange(e) {
@@ -68,12 +76,12 @@ class List extends React.Component {
     const { info } = this.props;
     const { id, title, listItems } = info;
     return (
-      <section className="list-container" id={id}>
+      <section className="list-container">
         <ul className="list">
           <li className="list-name-wrapper">
             <input placeholder={title} className="list-name" type="text" />
           </li>
-          {listItems.map(((text, index) => <ListItemEntry key={index} text={text} onListItemFocus={this.onListItemFocus} />))}
+          {listItems.map(((text, index) => <ListItemEntry key={index} id={index} text={text} handleArrowClick={this.handleArrowClick} />))}
           {this.renderTextAreaField()}
           <li className="add-another-card" onClick={this.toggleTextField}>
              + Add another Card
@@ -90,14 +98,22 @@ const infoShape = PropTypes.shape({
 });
 
 List.defaultProps = {
+  id: null,
+  length: null,
   info: {
     id: null,
     title: 'enter list name',
     listItems: [],
   },
+  passTextToStateManager: null,
+  deleteInsertListItem: null,
 };
 List.propTypes = {
+  id: PropTypes.number,
+  length: PropTypes.number,
   info: infoShape,
+  passTextToStateManager: PropTypes.func,
+  deleteInsertListItem: PropTypes.func,
 };
 
 export default List;

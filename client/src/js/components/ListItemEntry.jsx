@@ -2,22 +2,24 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 function ListItemEntry(props) {
-  const { text, onListItemFocus } = props;
+  const { id, text, handleArrowClick } = props;
   return (
-    <li>
-      <button className="left-arrow" type="button" placeholder="<" />
-      <span onClick={onListItemFocus}>{ text }</span>
-      <button className="right-arrow" type="button" placeholder=">" />
+    <li id={id}>
+      <button className="left-arrow" type="button" placeholder="<" onClick={handleArrowClick} />
+        <span>{ text }</span>
+      <button className="right-arrow" type="button" placeholder=">" onClick={handleArrowClick} />
     </li>
   );
 }
 ListItemEntry.defaultProps = {
+  id: null,
   text: null,
-  onListItemFocus: null,
+  handleArrowClick: null,
 };
 ListItemEntry.propTypes = {
+  id: PropTypes.number,
   text: PropTypes.string,
-  onListItemFocus: PropTypes.func,
+  handleArrowClick: PropTypes.func,
 };
 
 export default ListItemEntry;
