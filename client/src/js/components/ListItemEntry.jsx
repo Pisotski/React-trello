@@ -1,13 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import '../../css/ListItemEntry.css';
+import { faChevronCircleLeft, faChevronCircleRight } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 function ListItemEntry(props) {
   const { id, text, handleArrowClick } = props;
   return (
-    <li id={id}>
-      <button className="left-arrow" type="button" placeholder="<" onClick={handleArrowClick} />
-        <span>{ text }</span>
-      <button className="right-arrow" type="button" placeholder=">" onClick={handleArrowClick} />
+    <li id={id} className="list-item-wrapper">
+      <FontAwesomeIcon id="left-arrow" icon={faChevronCircleLeft} onClick={handleArrowClick} />
+      <div>{ text }</div>
+      <FontAwesomeIcon id="right-arrow" icon={faChevronCircleRight} onClick={handleArrowClick} />
     </li>
   );
 }

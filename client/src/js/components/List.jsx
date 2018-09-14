@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import ListItemEntry from './ListItemEntry';
+import '../../css/List.css';
 
 class List extends React.Component {
   constructor(props) {
@@ -17,7 +18,7 @@ class List extends React.Component {
 
   handleArrowClick(e) {
     const { length, id } = this.props;
-    const direction = e.currentTarget.className;
+    const direction = e.currentTarget.id;
     const itemId = e.currentTarget.parentNode.id;
     const validList = (arrowDirection) => {
       if (arrowDirection === 'left-arrow') {
@@ -47,7 +48,9 @@ class List extends React.Component {
     const { currentText } = this.state;
     const { passTextToStateManager, id } = this.props;
     this.toggleTextField();
-    passTextToStateManager(id, currentText);
+    if (currentText.length) {
+      passTextToStateManager(id, currentText);
+    }
   }
 
   handleListItemChange(e) {
@@ -78,7 +81,7 @@ class List extends React.Component {
     return (
       <section className="list-container">
         <ul className="list">
-          <li className="list-name-wrapper">
+          <li className="list-name-container">
             <input placeholder={title} className="list-name" type="text" />
           </li>
           {listItems.map(((text, index) => <ListItemEntry key={index} id={index} text={text} handleArrowClick={this.handleArrowClick} />))}

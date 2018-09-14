@@ -1,0 +1,64 @@
+/* -----------------------------------Variables & Globals*/
+:root {
+  --primary: #ddd;
+  --dark: #333;
+  --light: #fff;
+  --shadow: 0 1px 5px rgba(104, 104, 104, 0.8);
+}
+input,
+textarea {
+  border-radius: 5px;
+  outline: none;
+  transition: background-color 0.3s ease-in-out;
+}
+input:focus,
+textarea:focus{
+  background-color: var(--primary);
+}
+input:hover,
+textarea:hover{
+  background-color: var(--primary);
+}
+/* -----------------------------------List Wrapper */
+.list-container {  
+  border: 1px solid var(--dark);
+  border-radius: 5px;
+  width: 225px;
+  margin-left: 10px;
+  background-color: var(--dark);
+}
+.list {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+.list li:first-child {
+  background-color: var(--dark);
+}
+.list-name-container input {
+  width: 95%;
+}
+.list li:last-child {
+  background-color: var(--dark);
+  color: var(--primary);
+  padding: 5px;
+  border: 1px solid var(--dark);
+  transition: border 0.3s ease-in-out;
+}
+.list li:last-child:hover {
+  border: 1px solid var(--light);
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+}
+.list-container form {
+  background-color: var(--dark);
+  padding: 5px;
+  display: flex;
+}
+.list-container form input{
+  align-self: flex-end;
+}
+.list > li {
+  margin: 5px;
+  border-radius: 5px; 
+}

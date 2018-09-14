@@ -1,5 +1,6 @@
 import React from 'react';
 import List from './List';
+import '../../css/App.css';
 
 class App extends React.Component {
   constructor(props) {
@@ -9,7 +10,7 @@ class App extends React.Component {
       {
         id: 0,
         title: 'enter list name',
-        listItems: [],
+        listItems: ['xyi'],
       },
       listInfo: [],
     };
@@ -19,6 +20,7 @@ class App extends React.Component {
   }
 
   componentDidMount() {
+    this.renderList();
   }
 
   acceptCardToList(listId, card) {
@@ -33,9 +35,7 @@ class App extends React.Component {
   deleteInsertListItem(direction, listId, itemId) {
     const { listInfo } = this.state;
     const temp = listInfo[listId].listItems[itemId];
-    // listInfo[listId].listItems.splice(itemId, 0);
-
-    console.log(listInfo[listId].listItems.splice(itemId, 1));
+    listInfo[listId].listItems.splice(itemId, 1);
     this.setState({
       listInfo,
     });
@@ -68,7 +68,7 @@ class App extends React.Component {
           Add List
         </button>
         <div className="main-board">
-          {listInfo.filter(list => list).map(list => <List key={list.id} id={list.id} length={listInfo.length} info={list} passTextToStateManager={this.acceptCardToList} deleteInsertListItem={this.deleteInsertListItem} />)}
+          {listInfo.map(list => <List key={list.id} id={list.id} length={listInfo.length} info={list} passTextToStateManager={this.acceptCardToList} deleteInsertListItem={this.deleteInsertListItem} />)}
         </div>
       </div>
     );

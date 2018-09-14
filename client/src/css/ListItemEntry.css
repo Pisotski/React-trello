@@ -1,0 +1,37 @@
+/* -----------------------------------Variables & Globals*/
+:root {
+  --primary: #ddd;
+  --dark: #333;
+  --light: #fff;
+  --shadow: 0 1px 5px rgba(104, 104, 104, 0.8);
+}
+/* -------------------------------------Element Design */
+.list-item-wrapper {
+  display: flex;
+  align-self: center;
+  justify-content: space-between;
+}
+.list-item-wrapper div {
+  background-color: var(--light);
+  border-radius: 5px;
+  flex-shrink: 3;
+  height: 100%;
+  width: 100%;
+  padding: 3px 5px;
+}
+#left-arrow,
+#right-arrow {
+  align-self: center;
+  color: var(--light);
+}
+#left-arrow {
+  margin-right: 5px;
+}
+#right-arrow {
+  margin-left: 5px;
+}
+.list-item-wrapper div:hover,
+#right-arrow:hover
+#left-arrow:hover{
+  background-color: var(--primary);
+}
