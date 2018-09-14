@@ -1,36 +1,39 @@
 /* -----------------------------------Variables & Globals*/
 :root {
   --primary: #ddd;
-  --dark: #333;
+  --dark: rgba(51, 51, 51, 0.8);
   --light: #fff;
-  --shadow: 0 1px 5px rgba(104, 104, 104, 0.8);
+  --shadow: 0 0 5px 5px rgba(104, 104, 104, 0.8);
 }
 input,
 textarea {
+  border:none;
   border-radius: 5px;
   outline: none;
   transition: background-color 0.3s ease-in-out;
 }
-input:focus,
 textarea:focus{
   background-color: var(--primary);
 }
-input:hover,
 textarea:hover{
   background-color: var(--primary);
 }
 /* -----------------------------------List Wrapper */
 .list-container {  
-  border: 1px solid var(--dark);
+  border: 2px solid var(--dark);
   border-radius: 5px;
   width: 225px;
   margin-left: 10px;
   background-color: var(--dark);
+  transition: box-shadow 0.3s ease-in-out;
 }
 .list {
   list-style-type: none;
   margin: 0;
   padding: 0;
+}
+.list-container:hover {
+  box-shadow: var(--shadow);
 }
 .list li:first-child {
   background-color: var(--dark);
@@ -56,9 +59,18 @@ textarea:hover{
   display: flex;
 }
 .list-container form input{
-  align-self: flex-end;
+  align-self: center;
+  margin-left: 5px;
 }
 .list > li {
   margin: 5px;
   border-radius: 5px; 
+}
+.list-name {
+  background-color: var(--dark);
+  color: var(--primary);
+}
+.list-name:focus {
+  background-color: var(--primary);
+  color: var(--dark);
 }
