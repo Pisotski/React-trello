@@ -34,11 +34,9 @@ textarea:focus{
 textarea:hover{
   background-color: var(--primary);
 }
-
 /* -----------------------------------List Wrapper */
-
 .list-container {  
-  border: 2px solid var(--dark);
+  border-radius: 5px;
   min-width: 225px;
   max-width: 225px;
   margin-left: 10px;

@@ -72,7 +72,7 @@ class App extends React.Component {
           Add List
         </button>
         <div className="main-board">
-          {listInfo.map(list => <List key={list.id} id={list.id} length={listInfo.length} info={list} passTextToStateManager={this.acceptCardToList} deleteInsertListItem={this.deleteInsertListItem} />)}
+          {listInfo.map(list => <List key={list.id} id={list.id} info={list} passTextToStateManager={this.acceptCardToList} deleteInsertListItem={this.deleteInsertListItem} />)}
         </div>
       </div>
     );

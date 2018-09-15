@@ -14,26 +14,35 @@ class List extends React.Component {
     this.acceptText = this.acceptText.bind(this);
     this.handleListItemChange = this.handleListItemChange.bind(this);
     this.handleArrowClick = this.handleArrowClick.bind(this);
+    this.handleClickOutside = this.handleClickOutside.bind(this);
+    this.setWrapperRef = this.setWrapperRef.bind(this);
     this.keyAddAnotherCard = this.keyAddAnotherCard.bind(this);
   }
 
+  componentDidMount() {
+    document.addEventListener('mousedown', this.handleClickOutside);
+  }
+
+  componentWillUnmount() {
+    document.removeEventListener('mousedown', this.handleClickOutside);
+  }
+
+  setWrapperRef(node) {
+    this.wrapperRef = node;
+  }
+
+  handleClickOutside(event) {
+    if (this.wrapperRef && !this.wrapperRef.contains(event.target)) {
+      this.toggleTextField();
+    }
+  }
+
   handleArrowClick(e) {
-    const { length, id } = this.props;
+    const { id } = this.props;
     const direction = e.currentTarget.id;
     const itemId = e.currentTarget.parentNode.id;
-    const validList = (arrowDirection) => {
-      if (arrowDirection === 'left-arrow') {
-        return id > 0;
-      } if (arrowDirection === 'right-arrow') { return id < length - 1; }
-      return 'check className';
-    };
-
-    if (validList(direction)) {
-      const { deleteInsertListItem } = this.props;
-      deleteInsertListItem(direction, id, itemId);
-    } else {
-      console.log('Invalid direction', validList(direction));
-    }
+    const { deleteInsertListItem } = this.props;
+    deleteInsertListItem(direction, id, itemId);
   }
 
   toggleTextField() {
@@ -52,6 +61,9 @@ class List extends React.Component {
     if (currentText.length) {
       passTextToStateManager(id, currentText);
     }
+    this.setState({
+      currentText: '',
+    });
   }
 
   handleListItemChange(e) {
@@ -62,8 +74,14 @@ class List extends React.Component {
   }
 
   keyAddAnotherCard(e) {
+    const { currentText } = this.state;
+
     if (e.key === 'Enter') {
-      this.acceptText(e);
+      if (currentText.length) {
+        this.acceptText(e);
+      } else {
+        this.toggleTextField();
+      }
     }
   }
 
@@ -73,8 +91,8 @@ class List extends React.Component {
 
     if (showTextArea) {
       textarea = (
-        <form onSubmit={this.acceptText}>
-          <textarea type="text" className="list-item-text" onChange={this.handleListItemChange} onKeyPress={this.keyAddAnotherCard} />
+        <form onSubmit={this.acceptText} ref={this.setWrapperRef}>
+          <textarea autoFocus={true} type="text" className="list-item-text" onChange={this.handleListItemChange} onKeyDown={this.keyAddAnotherCard} />
           <input type="submit" value="ok" />
         </form>
       );
@@ -109,7 +127,6 @@ const infoShape = PropTypes.shape({
 
 List.defaultProps = {
   id: null,
-  length: null,
   info: {
     id: null,
     title: 'enter list name',
@@ -120,7 +137,6 @@ List.defaultProps = {
 };
 List.propTypes = {
   id: PropTypes.number,
-  length: PropTypes.number,
   info: infoShape,
   passTextToStateManager: PropTypes.func,
   deleteInsertListItem: PropTypes.func,
