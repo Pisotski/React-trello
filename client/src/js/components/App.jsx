@@ -53,8 +53,6 @@ class App extends React.Component {
       newList.id = newId;
       return newList;
     };
-    // think of how not to mutate state without that much of space.
-    // maybe change shape of initial state.
     const newListInfo = listInfo.concat([createNewList()]);
     this.setState({
       listInfo: newListInfo,

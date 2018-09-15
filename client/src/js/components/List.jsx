@@ -92,7 +92,7 @@ class List extends React.Component {
     if (showTextArea) {
       textarea = (
         <form onSubmit={this.acceptText} ref={this.setWrapperRef}>
-          <textarea autoFocus={true} type="text" className="list-item-text" onChange={this.handleListItemChange} onKeyDown={this.keyAddAnotherCard} />
+          <textarea autoFocus type="text" className="list-item-text" onChange={this.handleListItemChange} onKeyDown={this.keyAddAnotherCard} />
           <input type="submit" value="ok" />
         </form>
       );
