@@ -9,7 +9,7 @@ class App extends React.Component {
       defaultList:
       {
         id: 0,
-        title: 'enter list name',
+        title: 'Enter list name',
         listItems: [],
         arrows: 'left',
       },
@@ -56,14 +56,6 @@ class App extends React.Component {
     // think of how not to mutate state without that much of space.
     // maybe change shape of initial state.
     const newListInfo = listInfo.concat([createNewList()]);
-    const len = newListInfo.length;
-    if (newListInfo.length === 1) {
-      newListInfo[0].arrows = 'none';
-    } else if (newListInfo.length === 2) {
-      newListInfo[0].arrows = 'right';
-    } else {
-      newListInfo[len - 2].arrows = 'both';
-    }
     this.setState({
       listInfo: newListInfo,
     });
@@ -71,9 +63,11 @@ class App extends React.Component {
 
   render() {
     const { listInfo } = this.state;
-    console.log(listInfo);
     return (
       <div className="grid">
+        <header>
+          <h1>Best Trello Board Ever Maid</h1>
+        </header>
         <button className="add-list" type="button" onClick={this.renderList}>
           Add List
         </button>

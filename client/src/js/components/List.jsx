@@ -9,12 +9,12 @@ class List extends React.Component {
     this.state = {
       currentText: '',
       showTextArea: false,
-      showInputArea: false,
     };
     this.toggleTextField = this.toggleTextField.bind(this);
     this.acceptText = this.acceptText.bind(this);
     this.handleListItemChange = this.handleListItemChange.bind(this);
     this.handleArrowClick = this.handleArrowClick.bind(this);
+    this.keyAddAnotherCard = this.keyAddAnotherCard.bind(this);
   }
 
   handleArrowClick(e) {
@@ -61,6 +61,12 @@ class List extends React.Component {
     });
   }
 
+  keyAddAnotherCard(e) {
+    if (e.key === 'Enter') {
+      this.acceptText(e);
+    }
+  }
+
   renderTextAreaField() {
     let textarea;
     const { showTextArea } = this.state;
@@ -68,7 +74,7 @@ class List extends React.Component {
     if (showTextArea) {
       textarea = (
         <form onSubmit={this.acceptText}>
-          <textarea type="text" className="list-item-text" onChange={this.handleListItemChange} />
+          <textarea type="text" className="list-item-text" onChange={this.handleListItemChange} onKeyPress={this.keyAddAnotherCard} />
           <input type="submit" value="ok" />
         </form>
       );
@@ -76,29 +82,18 @@ class List extends React.Component {
     return textarea;
   }
 
-  renderInputArea() {
-    const { showInputArea } = this.state;
-    const { info } = this.props;
-    const className = showInputArea ? 'list-name' : 'list-name-hidden';
-
-    return (
-      <input placeholder={info.title} className={className} type="text" onClick={this.toggleInputField} />
-    );
-  }
-
   render() {
     const { info } = this.props;
-    const { arrows, title, listItems } = info;
-    console.log(info);
+    const { title, listItems } = info;
     return (
       <section className="list-container">
         <ul className="list">
           <li className="list-name-container">
             <input placeholder={title} className="list-name" type="text" />
           </li>
-          {listItems.map(((text, index) => <ListItemEntry key={index} arrows={arrows} id={index} text={text} handleArrowClick={this.handleArrowClick} />))}
+          {listItems.map(((text, index) => <ListItemEntry key={index} id={index} text={text} handleArrowClick={this.handleArrowClick} />))}
           {this.renderTextAreaField()}
-          <li className="add-another-card" onClick={this.toggleTextField}>
+          <li className="add-another-card" onKeyPress={this.keyAddAnotherCard} onClick={this.toggleTextField}>
              + Add another Card
           </li>
         </ul>
